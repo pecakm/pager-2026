@@ -1,36 +1,38 @@
 'use client';
 
-import type { FormEvent } from 'react';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Input, Button } from '@/components';
 
 import { FormContainer as Container } from '../../auth.styled';
 
+type SignUpFormValues = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 export default function Form() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<SignUpFormValues>({
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
+
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async ({ email, password }: SignUpFormValues) => {
     setError(null);
     setSuccess(null);
-
-    if (!email || !password) {
-      setError('Email and password are required.');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
-
-    setSubmitting(true);
 
     try {
       const response = await fetch('/api/auth/sign-up', {
@@ -51,47 +53,67 @@ export default function Form() {
       }
 
       setSuccess('Account created. You can now sign in.');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
     } catch {
       setError('Unable to sign up right now.');
     } finally {
-      setSubmitting(false);
+      reset();
     }
   };
 
+  const emailRegister = register('email', {
+    required: 'Email is required.',
+  });
+
+  const passwordRegister = register('password', {
+    required: 'Password is required.',
+  });
+
+  const confirmPasswordRegister = register('confirmPassword', {
+    required: 'Please confirm your password.',
+    validate: (value, formValues) =>
+      value === formValues.password || 'Passwords do not match.',
+  });
+
   return (
-    <Container onSubmit={handleSubmit}>
+    <Container onSubmit={handleSubmit(onSubmit)}>
       <Input
         type="email"
-        name="email"
         placeholder="Email"
         autoComplete="email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-        required
+        id="email"
+        name={emailRegister.name}
+        onChange={emailRegister.onChange}
+        onBlur={emailRegister.onBlur}
+        inputRef={emailRegister.ref}
+        error={!!errors.email}
+        helperText={errors.email?.message}
       />
       <Input
         type="password"
-        name="password"
         placeholder="Password"
         autoComplete="new-password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-        required
+        id="password"
+        name={passwordRegister.name}
+        onChange={passwordRegister.onChange}
+        onBlur={passwordRegister.onBlur}
+        inputRef={passwordRegister.ref}
+        error={!!errors.password}
+        helperText={errors.password?.message}
       />
       <Input
         type="password"
-        name="confirmPassword"
         placeholder="Confirm Password"
         autoComplete="new-password"
-        value={confirmPassword}
-        onChange={(event) => setConfirmPassword(event.target.value)}
-        required
+        id="confirmPassword"
+        name={confirmPasswordRegister.name}
+        onChange={confirmPasswordRegister.onChange}
+        onBlur={confirmPasswordRegister.onBlur}
+        inputRef={confirmPasswordRegister.ref}
+        error={!!errors.confirmPassword}
+        helperText={errors.confirmPassword?.message}
       />
       <Button type="submit">
-        {submitting ? 'Signing Up...' : 'Sign Up'}
+        {isSubmitting ? 'Signing Up...' : 'Sign Up'}
       </Button>
       {error && <p>{error}</p>}
       {success && <p>{success}</p>}

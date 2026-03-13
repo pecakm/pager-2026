@@ -3,7 +3,11 @@ import { Container } from './button.styled';
 
 export default function Button({ className, children, type = 'button' }: ButtonProps) {
   return (
-    <Container className={className} type={type}>
+    <Container
+      className={className}
+      variant="contained"
+      type={type}
+    >
       {children}
     </Container>
   );
