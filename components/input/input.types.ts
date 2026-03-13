@@ -1,5 +1,3 @@
-export interface InputProps {
-  type: string;
-  placeholder: string;
-  className?: string;
-}
+import type { InputHTMLAttributes } from 'react';
+
+export type InputProps = InputHTMLAttributes<HTMLInputElement>;
