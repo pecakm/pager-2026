@@ -3,6 +3,7 @@ import { Geist } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 
+import { ReactQueryProvider } from '@/lib/react-query';
 import { StyledComponentsRegistry } from '@/lib/styled-components';
 import { theme } from '@/lib/mui';
 
@@ -29,7 +30,9 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <StyledComponentsRegistry>
-              {children}
+              <ReactQueryProvider>
+                {children}
+              </ReactQueryProvider>
             </StyledComponentsRegistry>
           </ThemeProvider>
         </AppRouterCacheProvider>

@@ -1,20 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { Input, Button } from '@/components';
+import { signUp } from '@/services/client';
 import { signUpFormSchema, type SignUpFormValues } from '@/validations';
 
-import { FormContainer as Container } from '../../auth.styled';
+import { FormContainer as Container, ErrorMessage, SuccessMessage } from '../../auth.styled';
 
 export default function Form() {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
@@ -24,38 +25,23 @@ export default function Form() {
     },
   });
 
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  const mutation = useMutation({
+    mutationFn: signUp,
+    onSuccess: () => reset(),
+  });
 
-  const onSubmit = async ({ email, password }: SignUpFormValues) => {
-    setError(null);
-    setSuccess(null);
-
-    try {
-      const response = await fetch('/api/auth/sign-up', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = (await response.json().catch(() => null)) as
-        | { error?: string }
-        | null;
-
-      if (!response.ok) {
-        setError(data?.error ?? 'Unable to sign up.');
-        return;
-      }
-
-      setSuccess('Account created. You can now sign in.');
-    } catch {
-      setError('Unable to sign up right now.');
-    } finally {
-      reset();
-    }
+  const onSubmit = (values: SignUpFormValues) => {
+    mutation.reset();
+    mutation.mutate(values);
   };
+
+  const errorMessage =
+    mutation.error instanceof Error
+      ? mutation.error.message
+      : mutation.isError
+        ? 'Unable to sign up right now.'
+        : null;
+  const isSubmitting = mutation.isPending;
 
   const emailRegister = register('email');
   const passwordRegister = register('password');
@@ -102,8 +88,10 @@ export default function Form() {
       <Button type="submit">
         {isSubmitting ? 'Signing Up...' : 'Sign Up'}
       </Button>
-      {error && <p>{error}</p>}
-      {success && <p>{success}</p>}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {mutation.isSuccess && (
+        <SuccessMessage>Account created. You can now sign in.</SuccessMessage>
+      )}
     </Container>
   );
 }

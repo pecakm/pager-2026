@@ -9,3 +9,7 @@ export const FormContainer = styled.form`
   flex-direction: column;
   width: fit-content;
 `;
+
+export const ErrorMessage = styled.p``;
+
+export const SuccessMessage = styled.p``;
