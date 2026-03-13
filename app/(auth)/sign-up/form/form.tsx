@@ -1,17 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { Input, Button } from '@/components';
+import { signUpFormSchema, type SignUpFormValues } from '@/validations';
 
 import { FormContainer as Container } from '../../auth.styled';
-
-type SignUpFormValues = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
 
 export default function Form() {
   const {
@@ -20,6 +16,7 @@ export default function Form() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<SignUpFormValues>({
+    resolver: zodResolver(signUpFormSchema),
     defaultValues: {
       email: '',
       password: '',
@@ -60,19 +57,9 @@ export default function Form() {
     }
   };
 
-  const emailRegister = register('email', {
-    required: 'Email is required.',
-  });
-
-  const passwordRegister = register('password', {
-    required: 'Password is required.',
-  });
-
-  const confirmPasswordRegister = register('confirmPassword', {
-    required: 'Please confirm your password.',
-    validate: (value, formValues) =>
-      value === formValues.password || 'Passwords do not match.',
-  });
+  const emailRegister = register('email');
+  const passwordRegister = register('password');
+  const confirmPasswordRegister = register('confirmPassword');
 
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
