@@ -26,7 +26,14 @@
     "form": {
       "email": "Email",
       "password": "Password",
-      "submit": "Sign In"
+      "submit": "Sign In",
+      "submitting": "Signing In...",
+      "error": "Invalid email or password.",
+      "validation": {
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Please enter a valid email address.",
+        "passwordRequired": "Password is required."
+      }
     }
   }
 }
