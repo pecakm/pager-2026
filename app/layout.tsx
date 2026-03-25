@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
+import { NextIntlClientProvider } from 'next-intl';
 
 import { ReactQueryProvider } from '@/lib/react-query';
 import { StyledComponentsRegistry } from '@/lib/styled-components';
@@ -27,15 +28,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={geist.className}>
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <StyledComponentsRegistry>
-              <ReactQueryProvider>
-                {children}
-              </ReactQueryProvider>
-            </StyledComponentsRegistry>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <NextIntlClientProvider>
+          <AppRouterCacheProvider>
+            <ThemeProvider theme={theme}>
+              <StyledComponentsRegistry>
+                <ReactQueryProvider>
+                  {children}
+                </ReactQueryProvider>
+              </StyledComponentsRegistry>
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

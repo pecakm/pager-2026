@@ -1,0 +1,25 @@
+{
+  "home": {
+    "title": "Pager"
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Sign Up",
+      "submitting": "Signing Up...",
+      "success": "Account created. You can now sign in.",
+      "error": "Unable to sign up right now."
+    }
+  },
+  "signIn": {
+    "title": "Sign In",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In"
+    }
+  }
+}

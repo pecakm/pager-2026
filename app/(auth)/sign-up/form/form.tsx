@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -11,6 +12,7 @@ import { signUpFormSchema, type SignUpFormValues } from '@/validations';
 import { FormContainer as Container, ErrorMessage, SuccessMessage } from '../../auth.styled';
 
 export default function Form() {
+  const t = useTranslations('signUp.form');
   const {
     register,
     handleSubmit,
@@ -39,7 +41,7 @@ export default function Form() {
     mutation.error instanceof Error
       ? mutation.error.message
       : mutation.isError
-        ? 'Unable to sign up right now.'
+        ? t('error')
         : null;
   const isSubmitting = mutation.isPending;
 
@@ -51,7 +53,7 @@ export default function Form() {
     <Container onSubmit={handleSubmit(onSubmit)}>
       <Input
         type="email"
-        placeholder="Email"
+        placeholder={t('email')}
         autoComplete="email"
         id="email"
         name={emailRegister.name}
@@ -63,7 +65,7 @@ export default function Form() {
       />
       <Input
         type="password"
-        placeholder="Password"
+        placeholder={t('password')}
         autoComplete="new-password"
         id="password"
         name={passwordRegister.name}
@@ -75,7 +77,7 @@ export default function Form() {
       />
       <Input
         type="password"
-        placeholder="Confirm Password"
+        placeholder={t('confirmPassword')}
         autoComplete="new-password"
         id="confirmPassword"
         name={confirmPasswordRegister.name}
@@ -86,11 +88,11 @@ export default function Form() {
         helperText={errors.confirmPassword?.message}
       />
       <Button type="submit">
-        {isSubmitting ? 'Signing Up...' : 'Sign Up'}
+        {isSubmitting ? t('submitting') : t('submit')}
       </Button>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {mutation.isSuccess && (
-        <SuccessMessage>Account created. You can now sign in.</SuccessMessage>
+        <SuccessMessage>{t('success')}</SuccessMessage>
       )}
     </Container>
   );
