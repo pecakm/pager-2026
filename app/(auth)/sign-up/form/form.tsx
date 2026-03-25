@@ -61,7 +61,7 @@ export default function Form() {
         onBlur={emailRegister.onBlur}
         inputRef={emailRegister.ref}
         error={!!errors.email}
-        helperText={errors.email?.message}
+        helperText={errors.email?.message ? t(errors.email.message) : undefined}
       />
       <Input
         type="password"
@@ -73,7 +73,7 @@ export default function Form() {
         onBlur={passwordRegister.onBlur}
         inputRef={passwordRegister.ref}
         error={!!errors.password}
-        helperText={errors.password?.message}
+        helperText={errors.password?.message ? t(errors.password.message) : undefined}
       />
       <Input
         type="password"
@@ -85,7 +85,7 @@ export default function Form() {
         onBlur={confirmPasswordRegister.onBlur}
         inputRef={confirmPasswordRegister.ref}
         error={!!errors.confirmPassword}
-        helperText={errors.confirmPassword?.message}
+        helperText={errors.confirmPassword?.message ? t(errors.confirmPassword.message) : undefined}
       />
       <Button type="submit">
         {isSubmitting ? t('submitting') : t('submit')}
