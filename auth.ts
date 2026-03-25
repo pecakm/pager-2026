@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import argon2 from 'argon2';
 
 import { prisma } from '@/lib/prisma';
+import { signInFormSchema } from '@/validations';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -12,14 +13,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const email =
-          typeof credentials.email === 'string' ? credentials.email.trim() : '';
-        const password =
-          typeof credentials.password === 'string' ? credentials.password : '';
-
-        if (!email || !password) {
+        const parsed = signInFormSchema.safeParse(credentials);
+        if (!parsed.success) {
           return null;
         }
+
+        const { email, password } = parsed.data;
 
         const user = await prisma.user.findUnique({
           where: { email },
