@@ -14,7 +14,6 @@ export default function Input({
   error,
   helperText,
   inputRef,
-  maxLength,
 }: InputProps) {
   return (
     <Container
@@ -30,7 +29,6 @@ export default function Input({
       error={error}
       helperText={helperText}
       inputRef={inputRef}
-      inputProps={maxLength !== undefined ? { maxLength } : undefined}
     />
   );
 }

@@ -78,7 +78,6 @@ export default function Form() {
         inputRef={messageRegister.ref}
         error={!!errors.message}
         helperText={errors.message?.message ? t(errors.message.message) : undefined}
-        maxLength={120}
       />
       <Button type="submit">{isSubmitting ? t('sending') : t('send')}</Button>
       {serverError && <ErrorMessage>{serverError}</ErrorMessage>}
