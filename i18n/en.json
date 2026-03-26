@@ -1,6 +1,7 @@
 {
-  "home": {
-    "title": "Pager"
+  "navbar": {
+    "title": "Pager",
+    "logout": "Log out"
   },
   "signUp": {
     "title": "Sign Up",
