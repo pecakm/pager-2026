@@ -1,23 +1,16 @@
 import { z } from 'zod';
 
-export const sendMessageFormValidation = {
-  receiverEmailRequired: 'validation.receiverEmailRequired',
-  receiverEmailInvalid: 'validation.receiverEmailInvalid',
-  messageRequired: 'validation.messageRequired',
-  messageMaxLength: 'validation.messageMaxLength',
-} as const;
-
 export const sendMessageFormSchema = z.object({
   receiverEmail: z
     .string()
     .trim()
-    .min(1, sendMessageFormValidation.receiverEmailRequired)
-    .email(sendMessageFormValidation.receiverEmailInvalid),
+    .min(1, 'validation.receiverEmailRequired')
+    .email('validation.receiverEmailInvalid'),
   message: z
     .string()
     .trim()
-    .min(1, sendMessageFormValidation.messageRequired)
-    .max(120, sendMessageFormValidation.messageMaxLength),
+    .min(1, 'validation.messageRequired')
+    .max(120, 'validation.messageMaxLength'),
 });
 
 export type SendMessageFormValues = z.infer<typeof sendMessageFormSchema>;

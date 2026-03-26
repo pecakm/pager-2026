@@ -1,21 +1,13 @@
 import { z } from 'zod';
 
-export const signUpFormValidation = {
-  emailRequired: 'validation.emailRequired',
-  emailInvalid: 'validation.emailInvalid',
-  passwordRequired: 'validation.passwordRequired',
-  confirmPasswordRequired: 'validation.confirmPasswordRequired',
-  passwordsMismatch: 'validation.passwordsMismatch',
-} as const;
-
 export const signUpBaseSchema = z.object({
   email: z
     .string()
-    .min(1, signUpFormValidation.emailRequired)
-    .email(signUpFormValidation.emailInvalid),
+    .min(1, 'validation.emailRequired')
+    .email('validation.emailInvalid'),
   password: z
     .string()
-    .min(1, signUpFormValidation.passwordRequired),
+    .min(1, 'validation.passwordRequired'),
     // TODO: Add password validation
     // .min(8, 'Password must be at least 8 characters.'),
 });
@@ -24,10 +16,10 @@ export const signUpFormSchema = signUpBaseSchema
   .extend({
     confirmPassword: z
       .string()
-      .min(1, signUpFormValidation.confirmPasswordRequired),
+      .min(1, 'validation.confirmPasswordRequired'),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: signUpFormValidation.passwordsMismatch,
+    message: 'validation.passwordsMismatch',
     path: ['confirmPassword'],
   });
 
