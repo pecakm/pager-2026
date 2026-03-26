@@ -62,6 +62,7 @@ export async function notifyReceiverOfNewMessage(params: {
       body: preview,
       url: '/dashboard',
       tag: `message-${params.messageId}`,
+      badgeCount: 1,
     });
 
     await Promise.all(
