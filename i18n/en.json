@@ -35,5 +35,13 @@
         "passwordRequired": "Password is required."
       }
     }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "form": {
+      "receiver": "Receiver",
+      "message": "Message",
+      "send": "Send"
+    }
   }
 }
