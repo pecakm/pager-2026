@@ -7,7 +7,8 @@
  * - url     — path to open on click, e.g. "/dashboard" (default: "/dashboard")
  * - tag     — dedupe/replace notifications with the same tag
  * - icon    — override icon URL (default: /icons/icon-192x192.png)
- * - badge   — badge image URL
+ * - badge   — badge image URL (small monochrome icon in notification UI)
+ * - badgeCount — home-screen icon badge number (e.g. 1 = new message; Badging API; iOS PWA 16.4+)
  * - renotify — set true to alert again when updating same tag
  */
 
@@ -20,7 +21,7 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('push', (event) => {
-  /** @type {{ title?: string; body?: string; url?: string; tag?: string; icon?: string; badge?: string; renotify?: boolean }} */
+  /** @type {{ title?: string; body?: string; url?: string; tag?: string; icon?: string; badge?: string; badgeCount?: number; renotify?: boolean }} */
   let payload = {};
 
   if (event.data) {
@@ -44,7 +45,23 @@ self.addEventListener('push', (event) => {
     renotify: Boolean(payload.renotify),
   };
 
-  event.waitUntil(self.registration.showNotification(title, options));
+  const show = self.registration.showNotification(title, options);
+
+  const rawBadge = payload.badgeCount;
+  const badgeCount =
+    typeof rawBadge === 'number' && Number.isFinite(rawBadge) && rawBadge >= 0
+      ? Math.min(Math.floor(rawBadge), 99)
+      : null;
+
+  const setBadge =
+    badgeCount !== null &&
+    typeof self.registration.setAppBadge === 'function'
+      ? self.registration.setAppBadge(badgeCount)
+      : Promise.resolve();
+
+  event.waitUntil(
+    Promise.all([show, setBadge]).catch(() => undefined)
+  );
 });
 
 self.addEventListener('notificationclick', (event) => {
@@ -54,34 +71,42 @@ self.addEventListener('notificationclick', (event) => {
   const path = typeof rawUrl === 'string' && rawUrl.startsWith('/') ? rawUrl : '/dashboard';
   const targetUrl = new URL(path, self.location.origin).href;
 
+  const clearBadge =
+    typeof self.registration.clearAppBadge === 'function'
+      ? self.registration.clearAppBadge().catch(() => undefined)
+      : Promise.resolve();
+
   event.waitUntil(
-    (async () => {
-      const windowClients = await self.clients.matchAll({
-        type: 'window',
-        includeUncontrolled: true,
-      });
+    Promise.all([
+      clearBadge,
+      (async () => {
+        const windowClients = await self.clients.matchAll({
+          type: 'window',
+          includeUncontrolled: true,
+        });
 
-      for (const client of windowClients) {
-        if (client.url === targetUrl && 'focus' in client) {
-          return client.focus();
-        }
-      }
-
-      for (const client of windowClients) {
-        try {
-          const clientOrigin = new URL(client.url).origin;
-          if (clientOrigin === self.location.origin && 'navigate' in client) {
-            await client.navigate(targetUrl);
+        for (const client of windowClients) {
+          if (client.url === targetUrl && 'focus' in client) {
             return client.focus();
           }
-        } catch {
-          /* ignore invalid client.url */
         }
-      }
 
-      if (self.clients.openWindow) {
-        return self.clients.openWindow(targetUrl);
-      }
-    })()
+        for (const client of windowClients) {
+          try {
+            const clientOrigin = new URL(client.url).origin;
+            if (clientOrigin === self.location.origin && 'navigate' in client) {
+              await client.navigate(targetUrl);
+              return client.focus();
+            }
+          } catch {
+            /* ignore invalid client.url */
+          }
+        }
+
+        if (self.clients.openWindow) {
+          return self.clients.openWindow(targetUrl);
+        }
+      })(),
+    ])
   );
 });
