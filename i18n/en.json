@@ -1,0 +1,66 @@
+{
+  "navbar": {
+    "title": "Pager",
+    "login": "Log in",
+    "logout": "Log out"
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Sign Up",
+      "submitting": "Signing Up...",
+      "success": "Account created. You can now sign in.",
+      "error": "Unable to sign up right now.",
+      "validation": {
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Please enter a valid email address.",
+        "passwordRequired": "Password is required.",
+        "confirmPasswordRequired": "Please confirm your password.",
+        "passwordsMismatch": "Passwords do not match."
+      }
+    }
+  },
+  "signIn": {
+    "title": "Sign In",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "submitting": "Signing In...",
+      "error": "Invalid email or password.",
+      "validation": {
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Please enter a valid email address.",
+        "passwordRequired": "Password is required."
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "messageLine": {
+      "sent": "{date} To {email}: {content}",
+      "received": "{date} From {email}: {content}"
+    },
+    "form": {
+      "receiver": "Receiver email",
+      "message": "Message (max 120 characters)",
+      "send": "Send",
+      "sending": "Sending…",
+      "validation": {
+        "receiverEmailRequired": "Receiver email is required.",
+        "receiverEmailInvalid": "Please enter a valid email address.",
+        "messageRequired": "Message is required.",
+        "messageMaxLength": "Message must be at most 120 characters."
+      },
+      "errors": {
+        "receiverNotFound": "No user is registered with that email.",
+        "selfMessage": "You cannot send a message to yourself.",
+        "unauthenticated": "You must be signed in to send messages.",
+        "unknown": "Something went wrong. Please try again."
+      }
+    }
+  }
+}
