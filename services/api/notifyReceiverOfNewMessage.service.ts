@@ -58,7 +58,7 @@ export async function notifyReceiverOfNewMessage(params: {
         : params.messagePreview;
 
     const payload = JSON.stringify({
-      title: `New message from ${params.senderEmail}`,
+      title: params.senderEmail,
       body: preview,
       url: '/dashboard',
       tag: `message-${params.messageId}`,
