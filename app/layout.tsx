@@ -7,6 +7,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { ReactQueryProvider } from '@/lib/react-query';
 import { StyledComponentsRegistry } from '@/lib/styled-components';
 import { theme } from '@/lib/mui';
+import { Navbar } from '@/components';
 
 import './global.css';
 
@@ -33,6 +34,7 @@ export default function RootLayout({
             <ThemeProvider theme={theme}>
               <StyledComponentsRegistry>
                 <ReactQueryProvider>
+                  <Navbar />
                   {children}
                 </ReactQueryProvider>
               </StyledComponentsRegistry>
