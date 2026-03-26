@@ -1,0 +1,18 @@
+<svg width="120" height="120" viewBox="-10 -10 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left ringing lines -->
+  <path d="M10 28C-2 45 -2 60 10 77" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="M24 34C14 48 14 58 24 71" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Right ringing lines -->
+  <path d="M110 28C122 45 122 60 110 77" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="M96 34C106 48 106 58 96 71" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Bell top -->
+  <path d="M52 24C52 19 55 16 60 16C65 16 68 19 68 24" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Bell body -->
+  <path d="M38 52C38 40 47 32 60 32C73 32 82 40 82 52V66L88 74H32L38 66V52Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Clapper -->
+  <circle cx="60" cy="82" r="4" fill="currentColor"/>
+</svg>
