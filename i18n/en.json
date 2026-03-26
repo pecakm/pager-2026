@@ -39,9 +39,22 @@
   "dashboard": {
     "title": "Dashboard",
     "form": {
-      "receiver": "Receiver",
-      "message": "Message",
-      "send": "Send"
+      "receiver": "Receiver email",
+      "message": "Message (max 120 characters)",
+      "send": "Send",
+      "sending": "Sending…",
+      "validation": {
+        "receiverEmailRequired": "Receiver email is required.",
+        "receiverEmailInvalid": "Please enter a valid email address.",
+        "messageRequired": "Message is required.",
+        "messageMaxLength": "Message must be at most 120 characters."
+      },
+      "errors": {
+        "receiverNotFound": "No user is registered with that email.",
+        "selfMessage": "You cannot send a message to yourself.",
+        "unauthenticated": "You must be signed in to send messages.",
+        "unknown": "Something went wrong. Please try again."
+      }
     }
   }
 }

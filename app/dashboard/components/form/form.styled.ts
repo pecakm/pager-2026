@@ -5,3 +5,5 @@ export const Container = styled.form`
   flex-direction: column;
   width: fit-content;
 `;
+
+export const ErrorMessage = styled.p``;

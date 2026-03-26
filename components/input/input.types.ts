@@ -11,4 +11,5 @@ export interface InputProps {
   helperText?: string;
   inputRef?: React.Ref<HTMLInputElement>;
   className?: string;
+  maxLength?: number;
 }
