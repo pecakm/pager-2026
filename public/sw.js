@@ -10,7 +10,30 @@
  * - badge   — badge image URL (small monochrome icon in notification UI)
  * - badgeCount — home-screen icon badge number (e.g. 1 = new message; Badging API; iOS PWA 16.4+)
  * - renotify — set true to alert again when updating same tag
+ *
+ * Badging: In a service worker, use navigator.setAppBadge (WorkerNavigator), not only
+ * registration.setAppBadge — Safari/iOS implement the spec path and may omit the latter.
  */
+
+function swSetAppBadge(contents) {
+  if (typeof self.navigator !== 'undefined' && typeof self.navigator.setAppBadge === 'function') {
+    return self.navigator.setAppBadge(contents);
+  }
+  if (typeof self.registration.setAppBadge === 'function') {
+    return self.registration.setAppBadge(contents);
+  }
+  return Promise.resolve();
+}
+
+function swClearAppBadge() {
+  if (typeof self.navigator !== 'undefined' && typeof self.navigator.clearAppBadge === 'function') {
+    return self.navigator.clearAppBadge();
+  }
+  if (typeof self.registration.clearAppBadge === 'function') {
+    return self.registration.clearAppBadge();
+  }
+  return Promise.resolve();
+}
 
 self.addEventListener('install', () => {
   self.skipWaiting();
@@ -54,10 +77,7 @@ self.addEventListener('push', (event) => {
       : null;
 
   const setBadge =
-    badgeCount !== null &&
-    typeof self.registration.setAppBadge === 'function'
-      ? self.registration.setAppBadge(badgeCount)
-      : Promise.resolve();
+    badgeCount !== null ? swSetAppBadge(badgeCount) : Promise.resolve();
 
   event.waitUntil(
     Promise.all([show, setBadge]).catch(() => undefined)
@@ -71,10 +91,7 @@ self.addEventListener('notificationclick', (event) => {
   const path = typeof rawUrl === 'string' && rawUrl.startsWith('/') ? rawUrl : '/dashboard';
   const targetUrl = new URL(path, self.location.origin).href;
 
-  const clearBadge =
-    typeof self.registration.clearAppBadge === 'function'
-      ? self.registration.clearAppBadge().catch(() => undefined)
-      : Promise.resolve();
+  const clearBadge = swClearAppBadge().catch(() => undefined);
 
   event.waitUntil(
     Promise.all([
