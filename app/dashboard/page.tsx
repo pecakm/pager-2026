@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import { auth } from '@/auth';
+import { EnablePushButton } from '@/components';
 import { getMessagesForUser } from '@/services/api';
 
 import { Form } from './components';
@@ -21,6 +22,7 @@ export default async function Dashboard() {
   return (
     <Container>
       <Title>{t('title')}</Title>
+      <EnablePushButton />
       <Form />
       <Messages>
         {messages.map((message) => (
