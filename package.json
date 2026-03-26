@@ -22,6 +22,7 @@
     "@prisma/client": "^7.5.0",
     "@tanstack/react-query": "^5.90.21",
     "argon2": "^0.44.0",
+    "dayjs": "^1.11.20",
     "next": "16.1.6",
     "next-auth": "^5.0.0-beta.30",
     "next-intl": "^4.8.3",
