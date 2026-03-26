@@ -1,6 +1,5 @@
 import type { SendMessageErrorCode as SendMessageServiceErrorCode } from '@/services/api/sendMessage.types';
 
-/** Action-layer errors (session + validation + service). */
 type SendMessageErrorCode = SendMessageServiceErrorCode | 'unauthenticated';
 
 export type SendMessageResult =
