@@ -6,19 +6,22 @@ import { Path } from '@/enums';
 
 import { logoutAction } from './navbar.actions';
 import type { NavbarProps } from './navbar.types';
-import { Container, Title } from './navbar.styled';
+import { Container, LoggedInActions, Title, UserEmail } from './navbar.styled';
 
 export default async function Navbar({ session }: NavbarProps) {
   const t = await getTranslations('navbar');
-  const isLoggedIn = Boolean(session?.user);
+  const user = session?.user;
 
   return (
     <Container>
       <Link href={Path.Home}>
         <Title>{t('title')}</Title>
       </Link>
-      {isLoggedIn ? (
-        <Button onClick={logoutAction}>{t('logout')}</Button>
+      {user ? (
+        <LoggedInActions>
+          <UserEmail>{user.email}</UserEmail>
+          <Button onClick={logoutAction}>{t('logout')}</Button>
+        </LoggedInActions>
       ) : (
         <Link href={Path.SignIn}>
           {t('login')}

@@ -7,3 +7,10 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1``;
+
+export const LoggedInActions = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const UserEmail = styled.span``;
