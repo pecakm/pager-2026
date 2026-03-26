@@ -1,6 +1,7 @@
 {
   "navbar": {
     "title": "Pager",
+    "login": "Log in",
     "logout": "Log out"
   },
   "signUp": {

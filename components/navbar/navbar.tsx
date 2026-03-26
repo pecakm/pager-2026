@@ -1,6 +1,8 @@
+import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
 import { Button } from '@/components';
+import { Path } from '@/enums';
 
 import { logoutAction } from './navbar.actions';
 import type { NavbarProps } from './navbar.types';
@@ -12,9 +14,15 @@ export default async function Navbar({ session }: NavbarProps) {
 
   return (
     <Container>
-      <Title>{t('title')}</Title>
-      {isLoggedIn && (
+      <Link href={Path.Home}>
+        <Title>{t('title')}</Title>
+      </Link>
+      {isLoggedIn ? (
         <Button onClick={logoutAction}>{t('logout')}</Button>
+      ) : (
+        <Link href={Path.SignIn}>
+          {t('login')}
+        </Link>
       )}
     </Container>
   );
