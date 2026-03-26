@@ -4,6 +4,14 @@
     "login": "Log in",
     "logout": "Log out"
   },
+  "enablePushButton": {
+    "enable": "Enable notifications",
+    "enabling": "Enabling…",
+    "enabled": "Notifications on",
+    "blocked": "Notifications blocked in browser settings",
+    "unsupported": "Push is not supported in this browser",
+    "error": "Could not enable notifications. Try again."
+  },
   "signUp": {
     "title": "Sign Up",
     "form": {

@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 
 import { auth } from '@/auth';
 import { ReactQueryProvider } from '@/lib/react-query';
+import { ServiceWorkerProvider } from '@/lib/service-worker';
 import { StyledComponentsRegistry } from '@/lib/styled-components';
 import { theme } from '@/lib/mui';
 import { Navbar } from '@/components';
@@ -32,18 +33,20 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={geist.className}>
-        <NextIntlClientProvider>
-          <AppRouterCacheProvider>
-            <ThemeProvider theme={theme}>
-              <StyledComponentsRegistry>
-                <ReactQueryProvider>
-                  <Navbar session={session} />
-                  {children}
-                </ReactQueryProvider>
-              </StyledComponentsRegistry>
-            </ThemeProvider>
-          </AppRouterCacheProvider>
-        </NextIntlClientProvider>
+        <ServiceWorkerProvider>
+          <NextIntlClientProvider>
+            <AppRouterCacheProvider>
+              <ThemeProvider theme={theme}>
+                <StyledComponentsRegistry>
+                    <ReactQueryProvider>
+                      <Navbar session={session} />
+                      {children}
+                    </ReactQueryProvider>
+                </StyledComponentsRegistry>
+              </ThemeProvider>
+            </AppRouterCacheProvider>
+          </NextIntlClientProvider>
+        </ServiceWorkerProvider>
       </body>
     </html>
   );
