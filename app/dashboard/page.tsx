@@ -32,8 +32,8 @@ export default async function Dashboard() {
       <Title>{t('title')}</Title>
       <Form />
       <Messages>
-        {messages.map((m) => (
-          <MessageItem key={m.id}>{formatMessageLine(m, userId)}</MessageItem>
+        {messages.map((message) => (
+          <MessageItem key={message.id}>{formatMessageLine(message, userId, t)}</MessageItem>
         ))}
       </Messages>
     </Container>

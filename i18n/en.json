@@ -38,6 +38,10 @@
   },
   "dashboard": {
     "title": "Dashboard",
+    "messageLine": {
+      "sent": "{date} To {email}: {content}",
+      "received": "{date} From {email}: {content}"
+    },
     "form": {
       "receiver": "Receiver email",
       "message": "Message (max 120 characters)",

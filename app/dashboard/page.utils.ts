@@ -1,18 +1,13 @@
 import dayjs from 'dayjs';
 
-type MessageWithEmails = {
-  createdAt: Date;
-  content: string;
-  senderId: string;
-  sender: { email: string };
-  receiver: { email: string };
-};
+import type { MessageWithEmails, DashboardTranslator } from './page.types';
 
-export function formatMessageLine(message: MessageWithEmails, currentUserId: string): string {
+export function formatMessageLine(message: MessageWithEmails, currentUserId: string, t: DashboardTranslator): string {
   const date = dayjs(message.createdAt).format('DD.MM.YYYY HH:mm');
-  
+
   if (message.senderId === currentUserId) {
-    return `${date} To ${message.receiver.email}: ${message.content}`;
+    return t('messageLine.sent', { date, email: message.receiver.email, content: message.content });
   }
-  return `${date} From ${message.sender.email}: ${message.content}`;
+
+  return t('messageLine.received', { date, email: message.sender.email, content: message.content });
 }
