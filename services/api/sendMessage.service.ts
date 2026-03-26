@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { notifyReceiverOfNewMessage } from '@/services/api';
 
 import type { SendMessageInput, SendMessageResult } from './sendMessage.types';
 
@@ -27,17 +28,27 @@ export async function sendMessage(input: SendMessageInput): Promise<SendMessageR
     return { success: false, error: 'selfMessage' };
   }
 
+  let createdMessageId: string;
+
   try {
-    await prisma.message.create({
+    const created = await prisma.message.create({
       data: {
         content: message,
         senderId: sender.id,
         receiverId: receiver.id,
       },
     });
+    createdMessageId = created.id;
   } catch {
     return { success: false, error: 'unknown' };
   }
+
+  await notifyReceiverOfNewMessage({
+    receiverId: receiver.id,
+    senderEmail: sender.email,
+    messagePreview: message,
+    messageId: createdMessageId,
+  });
 
   return { success: true };
 }
