@@ -1,6 +1,8 @@
 import dayjs from 'dayjs';
 
-import type { MessageWithEmails, DashboardTranslator } from './page.types';
+import type { MessageWithEmails } from '@/services/api/getMessagesForUser.service';
+
+import type { DashboardTranslator } from './page.types';
 
 export function formatMessageLine(message: MessageWithEmails, currentUserId: string, t: DashboardTranslator): string {
   const date = dayjs(message.createdAt).format('DD.MM.YYYY HH:mm');

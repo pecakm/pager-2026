@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import { auth } from '@/auth';
-import { prisma } from '@/lib/prisma';
+import { getMessagesForUser } from '@/services/api';
 
 import { Form } from './components';
 import { formatMessageLine } from './page.utils';
@@ -16,16 +16,7 @@ export default async function Dashboard() {
     return null;
   }
 
-  const messages = await prisma.message.findMany({
-    where: {
-      OR: [{ senderId: userId }, { receiverId: userId }],
-    },
-    orderBy: { createdAt: 'desc' },
-    include: {
-      sender: { select: { email: true } },
-      receiver: { select: { email: true } },
-    },
-  });
+  const messages = await getMessagesForUser(userId);
 
   return (
     <Container>
