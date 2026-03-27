@@ -9,7 +9,7 @@ import { Button } from '@/components';
 import type { UiState } from './enablePushButton.types';
 import { ErrorMessage } from './enablePushButton.styled';
 
-export function EnablePushButton() {
+export default function EnablePushButton() {
   const t = useTranslations('enablePushButton');
   const [ui, setUi] = useState<UiState>('loading');
   const [busy, setBusy] = useState(false);

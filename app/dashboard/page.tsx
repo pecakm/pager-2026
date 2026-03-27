@@ -1,10 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 
 import { auth } from '@/auth';
-import { EnablePushButton } from '@/components';
 import { getMessagesForUser } from '@/services/api';
 
-import { Form, RefreshMessagesButton } from './components';
+import { EnablePushButton, Form, RefreshMessagesButton } from './components';
 import { formatMessageLine } from './page.utils';
 import { Container, Title, Messages, MessageItem } from './page.styled';
 
