@@ -3,13 +3,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-import { getExistingPushSubscription, subscribeToPush } from '@/lib/push-notifications';
+import {
+  getExistingPushSubscription,
+  subscribeToPush,
+  useSyncPushSubscriptionWithServer,
+} from '@/lib/push-notifications';
 import { Button } from '@/components';
 
 import type { UiState } from './enablePushButton.types';
 import { ErrorMessage, BlockedText } from './enablePushButton.styled';
 
 export default function EnablePushButton() {
+  useSyncPushSubscriptionWithServer();
+
   const t = useTranslations('enablePushButton');
   const [ui, setUi] = useState<UiState>('loading');
   const [busy, setBusy] = useState(false);
