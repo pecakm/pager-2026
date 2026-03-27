@@ -7,7 +7,7 @@ import { getExistingPushSubscription, subscribeToPush } from '@/lib/push-notific
 import { Button } from '@/components';
 
 import type { UiState } from './enablePushButton.types';
-import { ErrorMessage } from './enablePushButton.styled';
+import { ErrorMessage, BlockedText } from './enablePushButton.styled';
 
 export default function EnablePushButton() {
   const t = useTranslations('enablePushButton');
@@ -78,16 +78,12 @@ export default function EnablePushButton() {
 
   if (ui === 'denied') {
     return (
-      <span style={{ fontSize: '0.875rem', marginRight: '0.75rem', opacity: 0.85 }}>
-        {t('blocked')}
-      </span>
+      <BlockedText>{t('blocked')}</BlockedText>
     );
   }
 
   if (ui === 'subscribed') {
-    return (
-      <Button disabled>{t('enabled')}</Button>
-    );
+    return null;
   }
 
   return (
