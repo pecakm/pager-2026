@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
-import { Button } from '@/components';
 import { Path } from '@/enums';
+import { LogoutButton } from '@/components';
 
-import { logoutAction } from './navbar.actions';
 import type { NavbarProps } from './navbar.types';
 import { Container, LoggedInActions, Title, UserEmail } from './navbar.styled';
 
@@ -20,7 +19,7 @@ export default async function Navbar({ session }: NavbarProps) {
       {user ? (
         <LoggedInActions>
           <UserEmail>{user.email}</UserEmail>
-          <Button onClick={logoutAction}>{t('logout')}</Button>
+          <LogoutButton />
         </LoggedInActions>
       ) : (
         <Link href={Path.SignIn}>

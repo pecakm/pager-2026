@@ -1,13 +1,14 @@
 {
   "navbar": {
     "title": "Pager",
-    "login": "Log in",
+    "login": "Log in"
+  },
+  "logoutButton": {
     "logout": "Log out"
   },
   "enablePushButton": {
     "enable": "Enable notifications",
     "enabling": "Enabling…",
-    "enabled": "Notifications on",
     "blocked": "Notifications blocked in browser settings",
     "unsupported": "Push is not supported in this browser",
     "error": "Could not enable notifications. Try again."
@@ -48,6 +49,10 @@
   },
   "dashboard": {
     "title": "Dashboard",
+    "refreshMessagesButton": {
+      "refreshMessages": "Refresh messages",
+      "refreshingMessages": "Refreshing…"
+    },
     "messageLine": {
       "sent": "{date} To {email}: {content}",
       "received": "{date} From {email}: {content}"

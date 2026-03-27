@@ -3,13 +3,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-import { getExistingPushSubscription, subscribeToPush } from '@/lib/push-notifications';
+import {
+  getExistingPushSubscription,
+  subscribeToPush,
+  useSyncPushSubscriptionWithServer,
+} from '@/lib/push-notifications';
 import { Button } from '@/components';
 
 import type { UiState } from './enablePushButton.types';
-import { ErrorMessage } from './enablePushButton.styled';
+import { ErrorMessage, BlockedText } from './enablePushButton.styled';
 
-export function EnablePushButton() {
+export default function EnablePushButton() {
+  useSyncPushSubscriptionWithServer();
+
   const t = useTranslations('enablePushButton');
   const [ui, setUi] = useState<UiState>('loading');
   const [busy, setBusy] = useState(false);
@@ -78,16 +84,12 @@ export function EnablePushButton() {
 
   if (ui === 'denied') {
     return (
-      <span style={{ fontSize: '0.875rem', marginRight: '0.75rem', opacity: 0.85 }}>
-        {t('blocked')}
-      </span>
+      <BlockedText>{t('blocked')}</BlockedText>
     );
   }
 
   if (ui === 'subscribed') {
-    return (
-      <Button disabled>{t('enabled')}</Button>
-    );
+    return null;
   }
 
   return (
