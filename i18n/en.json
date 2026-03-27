@@ -48,6 +48,10 @@
   },
   "dashboard": {
     "title": "Dashboard",
+    "refreshMessagesButton": {
+      "refreshMessages": "Refresh messages",
+      "refreshingMessages": "Refreshing…"
+    },
     "messageLine": {
       "sent": "{date} To {email}: {content}",
       "received": "{date} From {email}: {content}"
