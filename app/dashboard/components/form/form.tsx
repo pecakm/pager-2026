@@ -5,12 +5,13 @@ import { useTranslations } from 'next-intl';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
+import { Send } from 'lucide-react';
 
-import { Input, Button } from '@/components';
+import { Input } from '@/components';
 import { sendMessageFormSchema, type SendMessageFormValues } from '@/validations';
 
 import { sendMessageAction } from './form.actions';
-import { Container, ErrorMessage } from './form.styled';
+import { Container, SendButton, ErrorMessage } from './form.styled';
 
 export default function Form() {
   const t = useTranslations('dashboard.form');
@@ -92,7 +93,10 @@ export default function Form() {
           />
         )}
       />
-      <Button type="submit">{isSubmitting ? t('sending') : t('send')}</Button>
+      <SendButton type="submit">
+        <Send size={14} />
+        {isSubmitting ? t('sending') : t('send')}
+      </SendButton>
       {serverError && <ErrorMessage>{serverError}</ErrorMessage>}
     </Container>
   );

@@ -19,7 +19,7 @@ export default function LogoutButton() {
 
   return (
     <Button onClick={handleClick}>
-      <LogOut size={20} />
+      <LogOut size={14} />
     </Button>
   );
 }

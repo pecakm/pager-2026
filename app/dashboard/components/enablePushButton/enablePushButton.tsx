@@ -2,16 +2,16 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Bell } from 'lucide-react';
 
 import {
   getExistingPushSubscription,
   subscribeToPush,
   useSyncPushSubscriptionWithServer,
 } from '@/lib/push-notifications';
-import { Button } from '@/components';
 
 import type { UiState } from './enablePushButton.types';
-import { ErrorMessage, BlockedText } from './enablePushButton.styled';
+import { Container, ErrorMessage, BlockedText } from './enablePushButton.styled';
 
 export default function EnablePushButton() {
   useSyncPushSubscriptionWithServer();
@@ -94,14 +94,15 @@ export default function EnablePushButton() {
 
   return (
     <>
-      <Button onClick={onEnable} disabled={busy}>
+      <Container onClick={onEnable} disabled={busy}>
+        <Bell size={14} />
         {busy ? t('enabling') : t('enable')}
-      </Button>
-      {error ? (
+      </Container>
+      {error && (
         <ErrorMessage>
           {error}
         </ErrorMessage>
-      ) : null}
+      )}
     </>
   );
 }
