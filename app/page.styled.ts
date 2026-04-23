@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
 import { Color } from '@/ui';
@@ -24,9 +25,11 @@ export const Hero = styled.section`
   background-color: #fff;
 `;
 
-export const HeroIcon = styled.img`
+export const HeroIcon = styled(Image)`
   width: 6rem;
   height: 6rem;
+  object-fit: contain;
+  display: block;
 `;
 
 export const Title = styled.h1`
@@ -94,4 +97,11 @@ export const StepItem = styled.li`
     color: ${Color.Primary};
     box-shadow: 0 2px 6px rgba(25, 76, 255, 0.12);
   }
+`;
+
+export const StyledImage = styled(Image)`
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
 `;

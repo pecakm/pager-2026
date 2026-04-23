@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styled from 'styled-components';
 
 import { Color } from '@/ui';
@@ -28,9 +29,11 @@ export const BrandLink = styled(Link)`
   }
 `;
 
-export const BrandIcon = styled.img`
+export const StyledImage = styled(Image)`
   width: 2rem;
   height: 2rem;
+  object-fit: contain;
+  display: block;
 `;
 
 export const LoggedInActions = styled.div`
