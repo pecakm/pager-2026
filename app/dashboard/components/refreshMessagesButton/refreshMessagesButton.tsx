@@ -2,13 +2,13 @@
 
 import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { RefreshCcw } from 'lucide-react';
 
-import { Button } from '@/components';
 import { clearAppBadge } from '@/lib/push-notifications';
 
+import { RefreshButton } from './refreshMessagesButton.styled';
+
 export default function RefreshMessagesButton() {
-  const t = useTranslations('dashboard.refreshMessagesButton');
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -18,12 +18,12 @@ export default function RefreshMessagesButton() {
   };
 
   return (
-    <Button
+    <RefreshButton
       type="button"
       onClick={handleClick}
       disabled={isPending}
     >
-      {isPending ? t('refreshingMessages') : t('refreshMessages')}
-    </Button>
+      <RefreshCcw size={14} />
+    </RefreshButton>
   );
 }

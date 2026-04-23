@@ -1,10 +1,16 @@
 {
   "navbar": {
     "title": "Pager",
-    "login": "Log in"
+    "login": "Sign In / Sign Up"
   },
-  "logoutButton": {
-    "logout": "Log out"
+  "home": {
+    "title": "Pager",
+    "description": "Pager helps you exchange quick updates with other users and stay informed with instant mobile notifications.",
+    "stepsTitle": "How to use the app",
+    "step1": "Download the app on your mobile device by adding it to your home screen.",
+    "step2": "Log in to your account.",
+    "step3": "Click the ENABLE NOTIFICATIONS button.",
+    "step4": "Send messages between users and receive notifications on your mobile phone."
   },
   "enablePushButton": {
     "enable": "Enable notifications",
@@ -15,6 +21,8 @@
   },
   "signUp": {
     "title": "Sign Up",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign In",
     "form": {
       "email": "Email",
       "password": "Password",
@@ -34,6 +42,8 @@
   },
   "signIn": {
     "title": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
     "form": {
       "email": "Email",
       "password": "Password",
@@ -49,10 +59,7 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "refreshMessagesButton": {
-      "refreshMessages": "Refresh messages",
-      "refreshingMessages": "Refreshing…"
-    },
+    "messages": "Messages",
     "messageLine": {
       "sent": "{date} To {email}: {content}",
       "received": "{date} From {email}: {content}"
