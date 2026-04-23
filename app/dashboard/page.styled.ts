@@ -52,6 +52,8 @@ export const MessagesTitle = styled.h3`
 export const MessageItem = styled.li`
   margin-top: 0.5rem;
   padding: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   font-size: 0.8rem;
   line-height: 1.45;
   color: #262626;
