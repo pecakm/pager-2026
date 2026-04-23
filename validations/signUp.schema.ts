@@ -7,9 +7,8 @@ export const signUpBaseSchema = z.object({
     .email('validation.emailInvalid'),
   password: z
     .string()
-    .min(1, 'validation.passwordRequired'),
-    // TODO: Add password validation
-    // .min(8, 'Password must be at least 8 characters.'),
+    .min(1, 'validation.passwordRequired')
+    .min(8, 'validation.passwordMinLength'),
 });
 
 export const signUpFormSchema = signUpBaseSchema
