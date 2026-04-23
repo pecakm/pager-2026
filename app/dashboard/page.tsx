@@ -5,7 +5,15 @@ import { getMessagesForUser } from '@/services/api';
 
 import { EnablePushButton, Form, RefreshMessagesButton } from './components';
 import { formatMessageLine } from './page.utils';
-import { Container, Title, Messages, MessageItem } from './page.styled';
+import {
+  Container,
+  Header,
+  Title,
+  Messages,
+  MessagesHeader,
+  MessagesTitle,
+  MessageItem,
+} from './page.styled';
 
 export default async function Dashboard() {
   const t = await getTranslations('dashboard');
@@ -20,11 +28,16 @@ export default async function Dashboard() {
 
   return (
     <Container>
-      <Title>{t('title')}</Title>
-      <EnablePushButton />
+      <Header>
+        <Title>{t('title')}</Title>
+        <EnablePushButton />
+      </Header>
       <Form />
-      <RefreshMessagesButton />
       <Messages>
+        <MessagesHeader>
+          <MessagesTitle>{t('messages')}</MessagesTitle>
+          <RefreshMessagesButton />
+        </MessagesHeader>
         {messages.map((message) => (
           <MessageItem key={message.id}>{formatMessageLine(message, userId, t)}</MessageItem>
         ))}
