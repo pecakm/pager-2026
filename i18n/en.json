@@ -3,6 +3,15 @@
     "title": "Pager",
     "login": "Sign In / Sign Up"
   },
+  "home": {
+    "title": "Pager",
+    "description": "Pager helps you exchange quick updates with other users and stay informed with instant mobile notifications.",
+    "stepsTitle": "How to use the app",
+    "step1": "Download the app on your mobile device by adding it to your home screen.",
+    "step2": "Log in to your account.",
+    "step3": "Click the ENABLE NOTIFICATIONS button.",
+    "step4": "Send messages between users and receive notifications on your mobile phone."
+  },
   "enablePushButton": {
     "enable": "Enable notifications",
     "enabling": "Enabling…",

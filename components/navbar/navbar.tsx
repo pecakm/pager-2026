@@ -6,6 +6,7 @@ import { LogoutButton } from '@/components';
 import type { NavbarProps } from './navbar.types';
 import {
   BrandLink,
+  BrandIcon,
   Container,
   LoggedInActions,
   NavLink,
@@ -19,6 +20,7 @@ export default async function Navbar({ session }: NavbarProps) {
   return (
     <Container>
       <BrandLink href={Path.Home}>
+        <BrandIcon src="/icons/bell.svg" alt="" aria-hidden="true" />
         {t('title')}
       </BrandLink>
       {user ? (

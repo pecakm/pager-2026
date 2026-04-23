@@ -14,6 +14,9 @@ export const Container = styled.header`
 `;
 
 export const BrandLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: inherit;
   text-decoration: none;
   font-size: 1rem;
@@ -23,6 +26,11 @@ export const BrandLink = styled(Link)`
   &:hover {
     opacity: 0.7;
   }
+`;
+
+export const BrandIcon = styled.img`
+  width: 2rem;
+  height: 2rem;
 `;
 
 export const LoggedInActions = styled.div`
