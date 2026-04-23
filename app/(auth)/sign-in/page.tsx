@@ -1,4 +1,7 @@
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+
+import { Path } from '@/enums';
 
 import { Container, Title } from '../auth.styled';
 
@@ -11,6 +14,7 @@ export default function SignIn() {
     <Container>
       <Title>{t('title')}</Title>
       <Form />
+      {t('noAccount')} <Link href={Path.SignUp}>{t('signUp')}</Link>
     </Container>
   );
 }

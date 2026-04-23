@@ -12,6 +12,8 @@
   },
   "signUp": {
     "title": "Sign Up",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign In",
     "form": {
       "email": "Email",
       "password": "Password",
@@ -31,6 +33,8 @@
   },
   "signIn": {
     "title": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
     "form": {
       "email": "Email",
       "password": "Password",
