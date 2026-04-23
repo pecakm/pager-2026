@@ -1,10 +1,7 @@
 {
   "navbar": {
     "title": "Pager",
-    "login": "Log in"
-  },
-  "logoutButton": {
-    "logout": "Log out"
+    "login": "Sign In / Sign Up"
   },
   "enablePushButton": {
     "enable": "Enable notifications",

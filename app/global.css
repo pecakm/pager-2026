@@ -45,8 +45,8 @@ h1, h2, h3, h4, h5, h6 {
 /* RESET CSS END */
 
 body {
-  background: #333;
-  color: #fafafa;
+  background-color: #fafafa;
+  color: #404040;
 }
 
 button {

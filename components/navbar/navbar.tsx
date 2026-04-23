@@ -1,11 +1,16 @@
-import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
 import { Path } from '@/enums';
 import { LogoutButton } from '@/components';
 
 import type { NavbarProps } from './navbar.types';
-import { Container, LoggedInActions, Title, UserEmail } from './navbar.styled';
+import {
+  BrandLink,
+  Container,
+  LoggedInActions,
+  NavLink,
+  UserEmail,
+} from './navbar.styled';
 
 export default async function Navbar({ session }: NavbarProps) {
   const t = await getTranslations('navbar');
@@ -13,18 +18,16 @@ export default async function Navbar({ session }: NavbarProps) {
 
   return (
     <Container>
-      <Link href={Path.Home}>
-        <Title>{t('title')}</Title>
-      </Link>
+      <BrandLink href={Path.Home}>
+        {t('title')}
+      </BrandLink>
       {user ? (
         <LoggedInActions>
           <UserEmail>{user.email}</UserEmail>
           <LogoutButton />
         </LoggedInActions>
       ) : (
-        <Link href={Path.SignIn}>
-          {t('login')}
-        </Link>
+        <NavLink href={Path.SignIn}>{t('login')}</NavLink>
       )}
     </Container>
   );
